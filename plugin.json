@@ -1,0 +1,21 @@
+{
+    "pluginName": "快递查询",
+    "description": "基于 17track 的全球物流查询工具",
+    "main": "index.html",
+    "author": "ziofat",
+    "logo": "icon.png",
+    "version": "0.1.0",
+    "features": [
+        {
+            "code": "track",
+            "cmds": [
+                "快递查询",
+                "track",
+                {
+                    "type": "over",
+                    "label": "追踪快递单号"
+                }
+            ]
+        }
+    ]
+}

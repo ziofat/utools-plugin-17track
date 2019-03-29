@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <!-- <script src="main.js"></script> -->
+</head>
+
+<body>
+    <div id="tracker" class="tracker">
+        <input type="text" id="YQNum" class="track-input" maxlength="50" placeholder="输入快递单号" />
+        <a id="track-button" class="track-button ripple" onclick="doTrack()" >查询</a>
+    </div>
+    <div id="YQContainer"></div>
+    <a id="track-back-button" class="track-button ripple" onclick="back()" >返回</a>
+
+    <script type="text/javascript" src="./libs/externalcall.js"></script>
+    <script type="text/javascript">
+        function doTrack(num) {
+            if (!num) {
+                num = document.getElementById("YQNum").value;
+            }
+            if (num === "") {
+                return;
+            }
+            YQV5.trackSingle({
+                YQ_ContainerId: "YQContainer",
+                YQ_Height: 560,
+                YQ_Fc: "0",
+                YQ_Lang: "zh-CN",
+                YQ_Num: num
+            });
+            document.getElementById("tracker").style.display = 'none';
+            document.getElementById('track-back-button').style.display = 'block';
+        }
+
+        document.getElementById('track-button').addEventListener('click', () => {
+            doTrack();
+        });
+        document.getElementById('track-back-button').addEventListener('click', () => {
+            document.getElementById("tracker").style.display = 'flex';
+            document.getElementById("YQContainer").style.display = 'none';
+            document.getElementById('track-back-button').style.display = 'none';
+        });
+
+        utools.onPluginEnter(({code, type, payload}) => {
+            if (type === 'over' && payload) {
+                doTrack(payload);
+            }
+        })
+        
+    </script>
+</body>
+
+</html>
